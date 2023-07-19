@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title>AI Capstone Project - Home</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function(){
+        $('form input').change(function () {
+          $('form p').text(this.files.length + " file(s) selected");
+        });
+      });
+  </script>
+</head>
+
+<body>
+ <div class="login">
+	<h1 style="text-align:center;">German Traffic Sign Prediction </h1>
+
+     <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('predict')}}"method="post" enctype="multipart/form-data">
+        <input type="file" id="file" name="file">
+          <p>Drag your files here or click in this area.</p>
+        <button type="submit">Predict</button> 
+        <br>
+        <br>   
+    </form>
+    <br>
+    <p style="color:red;"{{prediction_text}}</p>
+    <div class="parent">
+      <div>
+        <img src="{{ user_image }}" height="200px" width="320px"><br>
+        <p style="text-align:center;">Loaded</p>
+      </div>
+      <div>
+          <img src="{{ pred_image }}" height="200px" width="320px">
+          <p style="text-align:center;">Predict</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
